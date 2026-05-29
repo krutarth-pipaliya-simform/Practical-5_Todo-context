@@ -1,11 +1,12 @@
+import { useMyContext } from "@/hooks/useMyContext";
 import { TodoStateContext } from "./ContextWrapper";
 import { RadioSelection } from "./RadioSelection";
-import { Todo } from "./Todo";
-import { useContext, useState } from "react";
+import { Todo, type TodoType } from "./Todo";
+import { useState } from "react";
 
 export const TodoWrapper = () => {
     const [filter, setFilter] = useState<string>("All");
-    const todos = useContext(TodoStateContext);
+    const todos = useMyContext<TodoType[]>(TodoStateContext);
 
     const RadioProps = {
         filter,

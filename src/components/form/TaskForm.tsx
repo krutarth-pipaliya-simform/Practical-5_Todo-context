@@ -1,10 +1,12 @@
-import { memo, useContext } from "react";
+import { memo } from "react";
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
 import { TodoHandlerContext } from "../ContextWrapper";
+import { useMyContext } from "@/hooks/useMyContext";
+import type { TodoHandlerContextType } from "../types";
 
 export const TaskForm = memo(({ className }: { className: string }) => {
-    const { createTodo } = useContext(TodoHandlerContext);
+    const { createTodo } = useMyContext<TodoHandlerContextType>(TodoHandlerContext);
     console.log("form ");
     return (
         <form
