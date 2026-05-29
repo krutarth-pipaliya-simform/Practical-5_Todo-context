@@ -1,5 +1,5 @@
 import type { TodoType } from "@/components/Todo";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useTodoState = () => {
     const [todos, setTodos] = useState<TodoType[]>(getLocalstorageTodos());
@@ -8,21 +8,21 @@ export const useTodoState = () => {
         localStorage.setItem("todos", JSON.stringify(ValidTodos(todos)));
     }, [todos]);
 
-    const createTodo = (newTodo: TodoType) => {
+    const createTodo = useCallback((newTodo: TodoType) => {
         setTodos((prevTodos) => [...prevTodos, newTodo]);
-    };
+    }, []);
 
-    const deleteTodo = (todoId: string) => {
+    const deleteTodo = useCallback((todoId: string) => {
         setTodos((prevTodos) => prevTodos.filter(({ id }) => id != todoId));
-    };
+    }, []);
 
-    const toggleTodo = (todoId: string) => {
+    const toggleTodo = useCallback((todoId: string) => {
         setTodos((prevTodos) =>
             prevTodos.map((todo) =>
                 todoId === todo.id ? { ...todo, isComplete: !todo.isComplete } : todo,
             ),
         );
-    };
+    }, []);
 
     return { todos, createTodo, deleteTodo, toggleTodo };
 };

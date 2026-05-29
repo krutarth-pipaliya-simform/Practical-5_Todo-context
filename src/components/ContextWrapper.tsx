@@ -1,4 +1,4 @@
-import { createContext } from "react";
+import { createContext, useMemo } from "react";
 import type { TodoType } from "@/components/Todo";
 import { useTodoState } from "@/hooks/useTodoState";
 
@@ -11,11 +11,18 @@ export const TodoHandlerContext = createContext<{
 
 export const ContextWrapper = ({ children }) => {
     const { todos, createTodo, deleteTodo, toggleTodo } = useTodoState();
+    const handlers = useMemo(
+        () => ({
+            createTodo,
+            deleteTodo,
+            toggleTodo,
+        }),
+        [createTodo, deleteTodo, toggleTodo],
+    );
+
     return (
         <TodoStateContext.Provider value={todos}>
-            <TodoHandlerContext.Provider value={{ createTodo, deleteTodo, toggleTodo }}>
-                {children}
-            </TodoHandlerContext.Provider>
+            <TodoHandlerContext.Provider value={handlers}>{children}</TodoHandlerContext.Provider>
         </TodoStateContext.Provider>
     );
 };

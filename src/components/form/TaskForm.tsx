@@ -5,6 +5,7 @@ import { TodoHandlerContext } from "../ContextWrapper";
 
 export const TaskForm = ({ className }: { className: string }) => {
     const { createTodo } = useContext(TodoHandlerContext);
+    console.log("form ");
     return (
         <form
             className={className}
@@ -29,7 +30,7 @@ export const TaskForm = ({ className }: { className: string }) => {
                 isRequired={true}
             />
             <Button className="transition-colors hover:bg-green-500 cursor-pointer hover:text-white">
-                "Create Todo"
+                Create Todo
             </Button>
         </form>
     );
