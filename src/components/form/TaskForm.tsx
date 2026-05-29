@@ -1,9 +1,9 @@
-import { useContext } from "react";
+import { memo, useContext } from "react";
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
 import { TodoHandlerContext } from "../ContextWrapper";
 
-export const TaskForm = ({ className }: { className: string }) => {
+export const TaskForm = memo(({ className }: { className: string }) => {
     const { createTodo } = useContext(TodoHandlerContext);
     console.log("form ");
     return (
@@ -34,4 +34,4 @@ export const TaskForm = ({ className }: { className: string }) => {
             </Button>
         </form>
     );
-};
+});
