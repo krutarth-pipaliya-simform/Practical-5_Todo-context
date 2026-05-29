@@ -54,5 +54,5 @@ function getLocalstorageTodos() {
     if (!(parsedTodos instanceof Array)) {
         throw new Error("Localstorage has tempered data");
     }
-    return parsedTodos;
+    return ValidTodos(parsedTodos);
 }
