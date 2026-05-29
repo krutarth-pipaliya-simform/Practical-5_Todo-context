@@ -1,63 +1,30 @@
 import type { TodoType } from "@/components/Todo";
-import { useReducer } from "react";
+import { useEffect, useState } from "react";
 
-export type ActionType =
-    | {
-          type: "ADD";
-          todo: TodoType;
-      }
-    | {
-          type: "DELETE";
-          todoId: string;
-      }
-    | {
-          type: "UPDATE";
-          todo: TodoType;
-          todoId: string;
-      };
+export const useTodoState = () => {
+    const [todos, setTodos] = useState<TodoType[]>(getLocalstorageTodos());
 
-export const useMyReducer = () => {
-    let localTodos = localStorage.getItem("todos");
+    useEffect(() => {
+        localStorage.setItem("todos", JSON.stringify(ValidTodos(todos)));
+    }, [todos]);
 
-    if (localTodos === null) {
-        localStorage.setItem("todos", JSON.stringify([]));
-        localTodos = JSON.stringify([]);
-    }
+    const createTodo = (newTodo: TodoType) => {
+        setTodos((prevTodos) => [...prevTodos, newTodo]);
+    };
 
-    const parsedTodos = JSON.parse(localTodos ?? "");
+    const deleteTodo = (todoId: string) => {
+        setTodos((prevTodos) => prevTodos.filter(({ id }) => id != todoId));
+    };
 
-    if (!(parsedTodos instanceof Array)) {
-        throw new Error("Localstorage has tempered data");
-    }
+    const toggleTodo = (todoId: string) => {
+        setTodos((prevTodos) =>
+            prevTodos.map((todo) =>
+                todoId === todo.id ? { ...todo, isComplete: !todo.isComplete } : todo,
+            ),
+        );
+    };
 
-    return useReducer(reducer, ValidTodos(parsedTodos));
-};
-
-const reducer = (prevState: TodoType[], action: ActionType) => {
-    let returnArray;
-
-    switch (action.type) {
-        case "ADD":
-            localStorage.setItem("todos", JSON.stringify([...prevState, action.todo]));
-            returnArray = [...prevState, action.todo];
-            break;
-
-        case "DELETE":
-            returnArray = prevState.filter((todo) => todo.id !== action.todoId);
-            break;
-
-        case "UPDATE":
-            returnArray = prevState.map((todo) => (todo.id !== action.todoId ? todo : action.todo));
-            break;
-
-        default:
-            throw new Error("Please use proper Action");
-    }
-
-    returnArray = ValidTodos(returnArray);
-    localStorage.setItem("todos", JSON.stringify(returnArray));
-
-    return returnArray;
+    return { todos, createTodo, deleteTodo, toggleTodo };
 };
 
 function ValidTodos(todos: TodoType[]) {
@@ -72,4 +39,20 @@ function ValidTodos(todos: TodoType[]) {
             dateCreated.getFullYear() === today.getFullYear()
         );
     });
+}
+
+function getLocalstorageTodos() {
+    let todos = localStorage.getItem("todos");
+
+    if (todos === null) {
+        localStorage.setItem("todos", JSON.stringify([]));
+        todos = JSON.stringify([]);
+    }
+
+    const parsedTodos = JSON.parse(todos ?? "");
+
+    if (!(parsedTodos instanceof Array)) {
+        throw new Error("Localstorage has tempered data");
+    }
+    return parsedTodos;
 }
