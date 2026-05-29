@@ -1,16 +1,12 @@
-import { type ActionType } from "@/hooks/useMyReducer";
+import { TodoStateContext } from "./ContextWrapper";
 import { RadioSelection } from "./RadioSelection";
-import { Todo, type TodoType } from "./Todo";
-import { useState } from "react";
+import { Todo } from "./Todo";
+import { useContext, useState } from "react";
 
-export const Main = ({
-    todos,
-    dispatch,
-}: {
-    todos: TodoType[];
-    dispatch: (action: ActionType) => void;
-}) => {
+export const TodoWrapper = () => {
     const [filter, setFilter] = useState<string>("All");
+    const todos = useContext(TodoStateContext);
+
     const RadioProps = {
         filter,
         setFilter,
@@ -43,7 +39,7 @@ export const Main = ({
                     )
                     .map((todo) => (
                         <li key={todo.id}>
-                            <Todo dispatch={dispatch} {...todo}></Todo>
+                            <Todo todo={todo} />
                         </li>
                     ))}
             </ul>

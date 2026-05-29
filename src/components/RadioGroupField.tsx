@@ -12,6 +12,7 @@ export const RadioGroupField = ({
     value,
 }: RadioGroupProps & { onClick: () => void }) => {
     const id = useId();
+
     return (
         <div className="flex items-center gap-3" onClick={onClick}>
             <RadioGroupItem className="cursor-pointer" id={id} value={value} />

@@ -1,13 +1,9 @@
-import type { ActionType } from "@/hooks/useMyReducer";
+import { useContext } from "react";
+import { TodoHandlerContext } from "./ContextWrapper";
 import { Button } from "./ui/button";
 
-export const Todo = ({
-    title,
-    timeCreated,
-    isComplete,
-    dispatch,
-    id,
-}: TodoType & { dispatch: (action: ActionType) => void }) => {
+export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: TodoType }) => {
+    const { deleteTodo, toggleTodo } = useContext(TodoHandlerContext);
     return (
         <div className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted">
             <div>
@@ -16,17 +12,8 @@ export const Todo = ({
                     type="checkbox"
                     name="isComplete"
                     checked={isComplete}
-                    onChange={(e) => {
-                        dispatch({
-                            type: "UPDATE",
-                            todoId: String(id),
-                            todo: {
-                                id: String(id),
-                                isComplete: e.target.checked,
-                                timeCreated,
-                                title,
-                            },
-                        });
+                    onChange={() => {
+                        toggleTodo(String(id));
                     }}
                 />
             </div>
@@ -39,7 +26,7 @@ export const Todo = ({
 
             <Button
                 onClick={() => {
-                    dispatch({ type: "DELETE", todoId: id });
+                    deleteTodo(id);
                 }}
                 className="transition-colors hover:bg-red-500 cursor-pointer hover:text-white"
             >

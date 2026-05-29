@@ -12,20 +12,18 @@ export const RadioSelection = ({
     RadioGroupFieldArray: RadioGroupProps[];
 }) => {
     return (
-        <>
-            <RadioGroup className="flex p-4" value={filter}>
-                {RadioGroupFieldArray.map((field) => {
-                    return (
-                        <RadioGroupField
-                            onClick={() => {
-                                setFilter(field.value);
-                            }}
-                            key={field.label}
-                            {...field}
-                        ></RadioGroupField>
-                    );
-                })}
-            </RadioGroup>
-        </>
+        <RadioGroup className="flex p-4" value={filter}>
+            {RadioGroupFieldArray.map((field) => {
+                return (
+                    <RadioGroupField
+                        onClick={() => {
+                            setFilter(field.value);
+                        }}
+                        key={field.label}
+                        {...field}
+                    ></RadioGroupField>
+                );
+            })}
+        </RadioGroup>
     );
 };
