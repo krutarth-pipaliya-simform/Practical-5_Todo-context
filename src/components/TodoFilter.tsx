@@ -6,8 +6,8 @@ export const TodoFilter = ({
     filter,
     setFilter,
 }: {
-    filter: string;
-    setFilter: Dispatch<SetStateAction<string>>;
+    filter: "All" | "Completed" | "Incomplete";
+    setFilter: Dispatch<SetStateAction<"All" | "Completed" | "Incomplete">>;
 }) => {
     return (
         <RadioGroup className="flex p-4 gap-8" value={filter}>
@@ -27,4 +27,4 @@ export const TodoFilter = ({
     );
 };
 
-const RadioGroupFieldArray = ["All", "Completed", "Incomplete"];
+const RadioGroupFieldArray = ["All", "Completed", "Incomplete"] as const;

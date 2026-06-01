@@ -1,4 +1,4 @@
-import type { TodoType } from "@/components/Todo";
+import type { TodoType } from "@/components/types";
 import type { TodoHandlerContextType } from "@/components/types";
 import { createContext, useContext } from "react";
 

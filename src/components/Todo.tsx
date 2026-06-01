@@ -1,3 +1,4 @@
+import type { TodoType } from "./types";
 import { Button } from "./ui/button";
 import { useTodoHandlerContext } from "@/hooks/useMyContext";
 
@@ -34,10 +35,3 @@ export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: T
         </div>
     );
 };
-
-export interface TodoType {
-    id: string;
-    title: string;
-    timeCreated: string;
-    isComplete: boolean;
-}
