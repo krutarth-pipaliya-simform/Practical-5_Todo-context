@@ -1,5 +1,5 @@
-import type { TodoType } from "@/components/Todo";
 import { useCallback, useEffect, useState } from "react";
+import type { TodoType } from "@/components/Todo";
 
 export const useTodoState = () => {
     const [todos, setTodos] = useState<TodoType[]>(getLocalstorageTodos());

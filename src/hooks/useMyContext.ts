@@ -1,7 +1,19 @@
-import { useContext, type Context } from "react";
+import type { TodoType } from "@/components/Todo";
+import type { TodoHandlerContextType } from "@/components/types";
+import { createContext, useContext } from "react";
 
-export const useMyContext = <T>(Context: Context<T | undefined>) => {
-    const data = useContext(Context);
+export const TodoStateContext = createContext<TodoType[] | undefined>(undefined);
+
+export const useTodoStateContext = () => {
+    const data = useContext(TodoStateContext);
     if (!data) throw new Error("Use Context inside wrapper");
+    return data;
+};
+
+export const TodoHandlerContext = createContext<TodoHandlerContextType | undefined>(undefined);
+
+export const useTodoHandlerContext = () => {
+    const data = useContext(TodoHandlerContext);
+    if (!data) throw new Error("Use Context inside Wrapper");
     return data;
 };

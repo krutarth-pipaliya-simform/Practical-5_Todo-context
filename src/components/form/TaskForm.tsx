@@ -1,16 +1,14 @@
 import { memo } from "react";
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
-import { TodoHandlerContext } from "../ContextWrapper";
-import { useMyContext } from "@/hooks/useMyContext";
-import type { TodoHandlerContextType } from "../types";
+import { useTodoHandlerContext } from "@/hooks/useMyContext";
 
-export const TaskForm = memo(({ className }: { className: string }) => {
-    const { createTodo } = useMyContext<TodoHandlerContextType>(TodoHandlerContext);
-    console.log("form ");
+export const TaskForm = memo(() => {
+    const { createTodo } = useTodoHandlerContext();
+
     return (
         <form
-            className={className}
+            className="flex gap-4"
             action={(formData: FormData) => {
                 if (String(formData.get("todo")).trim() === "") {
                     alert("please enter some text");

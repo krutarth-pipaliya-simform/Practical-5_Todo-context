@@ -1,10 +1,8 @@
-import { TodoHandlerContext } from "./ContextWrapper";
-import type { TodoHandlerContextType } from "./types";
 import { Button } from "./ui/button";
-import { useMyContext } from "@/hooks/useMyContext";
+import { useTodoHandlerContext } from "@/hooks/useMyContext";
 
 export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: TodoType }) => {
-    const { deleteTodo, toggleTodo } = useMyContext<TodoHandlerContextType>(TodoHandlerContext);
+    const { deleteTodo, toggleTodo } = useTodoHandlerContext();
     return (
         <div className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted">
             <div>

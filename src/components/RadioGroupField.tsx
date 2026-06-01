@@ -1,10 +1,6 @@
 import { useId } from "react";
 import { Label } from "./ui/label";
 import { RadioGroupItem } from "./ui/radio-group";
-export interface RadioGroupProps {
-    label: string;
-    value: string;
-}
 
 export const RadioGroupField = ({
     onClick,
@@ -22,3 +18,8 @@ export const RadioGroupField = ({
         </div>
     );
 };
+
+interface RadioGroupProps {
+    label: string;
+    value: string;
+}

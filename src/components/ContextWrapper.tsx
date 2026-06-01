@@ -1,10 +1,6 @@
-import { createContext, useMemo, type PropsWithChildren } from "react";
-import type { TodoType } from "@/components/Todo";
+import { useMemo, type PropsWithChildren } from "react";
 import { useTodoState } from "@/hooks/useTodoState";
-import type { TodoHandlerContextType } from "./types";
-
-export const TodoStateContext = createContext<TodoType[] | undefined>(undefined);
-export const TodoHandlerContext = createContext<TodoHandlerContextType | undefined>(undefined);
+import { TodoHandlerContext, TodoStateContext } from "@/hooks/useMyContext";
 
 export const ContextWrapper = ({ children }: PropsWithChildren) => {
     const { todos, createTodo, deleteTodo, toggleTodo } = useTodoState();

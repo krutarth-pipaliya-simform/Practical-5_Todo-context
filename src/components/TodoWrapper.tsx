@@ -1,49 +1,14 @@
-import { useMyContext } from "@/hooks/useMyContext";
-import { TodoStateContext } from "./ContextWrapper";
-import { RadioSelection } from "./RadioSelection";
-import { Todo, type TodoType } from "./Todo";
 import { useState } from "react";
+import { TodoFilter } from "./TodoFilter";
+import { TodoList } from "./TodoList";
 
 export const TodoWrapper = () => {
-    const [filter, setFilter] = useState<string>("All");
-    const todos = useMyContext<TodoType[]>(TodoStateContext);
-
-    const RadioProps = {
-        filter,
-        setFilter,
-        RadioGroupFieldArray: [
-            {
-                label: "All",
-                value: "All",
-            },
-            {
-                label: "Completed",
-                value: "Completed",
-            },
-            {
-                label: "Incomplete",
-                value: "Incomplete",
-            },
-        ],
-    };
+    const [filter, setFilter] = useState<"All" | "Completed" | "Incomplete">("All");
 
     return (
         <main className="p-4 flex flex-col flex-1 overflow-hidden">
-            <RadioSelection {...RadioProps}></RadioSelection>
-            <ul className="flex-1 pt-4 overflow-y-auto ">
-                {todos
-                    .filter(
-                        ({ isComplete }) =>
-                            filter === "All" ||
-                            (filter === "Completed" && isComplete) ||
-                            (filter === "Incomplete" && !isComplete),
-                    )
-                    .map((todo) => (
-                        <li key={todo.id}>
-                            <Todo todo={todo} />
-                        </li>
-                    ))}
-            </ul>
+            <TodoFilter filter={filter} setFilter={setFilter} />
+            <TodoList filter={filter} />
         </main>
     );
 };
