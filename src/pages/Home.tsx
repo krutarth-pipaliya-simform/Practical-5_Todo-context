@@ -1,4 +1,4 @@
-import { TodoContextProvider } from "@/components/ContextWrapper";
+import { TodoContextProvider } from "@/components/TodoContextProvider";
 import { TaskForm } from "@/components/form/TaskForm";
 import { TodoWrapper } from "@/components/TodoWrapper";
 
