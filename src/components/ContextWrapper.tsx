@@ -2,7 +2,7 @@ import { useMemo, type PropsWithChildren } from "react";
 import { useTodoState } from "@/hooks/useTodoState";
 import { TodoHandlerContext, TodoStateContext } from "@/hooks/useMyContext";
 
-export const ContextWrapper = ({ children }: PropsWithChildren) => {
+export const TodoContextProvider = ({ children }: PropsWithChildren) => {
     const { todos, createTodo, deleteTodo, toggleTodo } = useTodoState();
     const handlers = useMemo(
         () => ({
