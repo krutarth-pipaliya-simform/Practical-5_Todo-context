@@ -1,27 +1,30 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import type { TodoType } from "@/components/types";
+import type { ActionType } from "./types";
 
 export const useTodoState = () => {
-    const [todos, setTodos] = useState<TodoType[]>(getLocalstorageTodos());
+    const [todos, dispatch] = useReducer(reducer, getLocalstorageTodos());
 
     useEffect(() => {
         localStorage.setItem("todos", JSON.stringify(ValidTodos(todos)));
     }, [todos]);
 
     const createTodo = useCallback((newTodo: TodoType) => {
-        setTodos((prevTodos) => [...prevTodos, newTodo]);
+        dispatch({
+            type: "ADD",
+            todo: newTodo,
+        });
     }, []);
 
     const deleteTodo = useCallback((todoId: string) => {
-        setTodos((prevTodos) => prevTodos.filter(({ id }) => id != todoId));
+        dispatch({ type: "DELETE", todoId });
     }, []);
 
     const toggleTodo = useCallback((todoId: string) => {
-        setTodos((prevTodos) =>
-            prevTodos.map((todo) =>
-                todoId === todo.id ? { ...todo, isComplete: !todo.isComplete } : todo,
-            ),
-        );
+        dispatch({
+            type: "TOGGLE",
+            todoId,
+        });
     }, []);
 
     return { todos, createTodo, deleteTodo, toggleTodo };
@@ -56,3 +59,28 @@ function getLocalstorageTodos() {
     }
     return ValidTodos(parsedTodos);
 }
+
+const reducer = (prevState: TodoType[], action: ActionType) => {
+    let returnArray;
+
+    switch (action.type) {
+        case "ADD":
+            returnArray = [...prevState, action.todo];
+            break;
+
+        case "DELETE":
+            returnArray = prevState.filter((todo) => todo.id !== action.todoId);
+            break;
+
+        case "TOGGLE":
+            returnArray = prevState.map((todo) =>
+                todo.id !== action.todoId ? todo : { ...todo, isComplete: !todo.isComplete },
+            );
+            break;
+
+        default:
+            throw new Error("Please use proper Action");
+    }
+
+    return ValidTodos(returnArray);
+};
