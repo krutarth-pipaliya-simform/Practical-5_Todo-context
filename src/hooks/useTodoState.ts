@@ -1,6 +1,19 @@
 import { useCallback, useEffect, useReducer } from "react";
 import type { TodoType } from "@/components/types";
-import type { ActionType } from "./types";
+
+type ActionType =
+    | {
+          type: "ADD";
+          todo: TodoType;
+      }
+    | {
+          type: "DELETE";
+          todoId: string;
+      }
+    | {
+          type: "TOGGLE";
+          todoId: string;
+      };
 
 export const useTodoState = () => {
     const [todos, dispatch] = useReducer(reducer, getLocalstorageTodos());
