@@ -15,7 +15,7 @@ type ActionType =
           todoId: string;
       };
 
-export const useTodoState = () => {
+export const useTodos = () => {
     const [todos, dispatch] = useReducer(reducer, getLocalstorageTodos());
 
     useEffect(() => {

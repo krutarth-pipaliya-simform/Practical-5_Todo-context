@@ -1,9 +1,9 @@
 import { TodoContext } from "@/hooks/useTodoContext";
-import { useTodoState } from "@/hooks/useTodoState";
+import { useTodos } from "@/hooks/useTodos";
 import { useMemo, type PropsWithChildren } from "react";
 
 export const TodosProvider = ({ children }: PropsWithChildren) => {
-    const { todos, createTodo, deleteTodo, toggleTodo } = useTodoState();
+    const { todos, createTodo, deleteTodo, toggleTodo } = useTodos();
     const contextValue = useMemo(
         () => ({
             todos,
