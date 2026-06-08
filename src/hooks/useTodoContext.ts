@@ -1,5 +1,12 @@
 import { createContext, useContext } from "react";
-import type { TodoContextType } from "@/components/types";
+import type { TodoType } from "@/components/types";
+
+interface TodoContextType {
+    todos: Array<TodoType>;
+    createTodo: (newTodo: TodoType) => void;
+    deleteTodo: (todoId: string) => void;
+    toggleTodo: (todoId: string) => void;
+}
 
 export const TodoContext = createContext<TodoContextType | undefined>(undefined);
 

@@ -2,7 +2,11 @@ import type { TodoType } from "./types";
 import { Button } from "./ui/button";
 import { useTodoContext } from "@/hooks/useTodoContext";
 
-export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: TodoType }) => {
+interface TodoProps {
+    todo: TodoType;
+}
+
+export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps) => {
     const { deleteTodo, toggleTodo } = useTodoContext();
     return (
         <li className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted">

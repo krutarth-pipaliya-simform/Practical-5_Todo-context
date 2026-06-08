@@ -4,15 +4,3 @@ export interface TodoType {
     timeCreated: string;
     isComplete: boolean;
 }
-
-export type TodoContextType = {
-    todos: Array<TodoType>;
-    createTodo: (newTodo: TodoType) => void;
-    deleteTodo: (todoId: string) => void;
-    toggleTodo: (todoId: string) => void;
-};
-
-export interface RadioGroupProps {
-    label: string;
-    value: string;
-}
