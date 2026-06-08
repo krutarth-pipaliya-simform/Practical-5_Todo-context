@@ -9,10 +9,10 @@ export const useTodoState = () => {
         localStorage.setItem("todos", JSON.stringify(ValidTodos(todos)));
     }, [todos]);
 
-    const createTodo = useCallback((newTodo: TodoType) => {
+    const createTodo = useCallback((Todo: TodoType) => {
         dispatch({
             type: "ADD",
-            todo: newTodo,
+            todo: Todo,
         });
     }, []);
 
