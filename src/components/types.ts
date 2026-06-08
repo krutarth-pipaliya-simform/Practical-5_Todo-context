@@ -5,7 +5,8 @@ export interface TodoType {
     isComplete: boolean;
 }
 
-export type TodoHandlerContextType = {
+export type TodoContextType = {
+    todos: Array<TodoType>;
     createTodo: (newTodo: TodoType) => void;
     deleteTodo: (todoId: string) => void;
     toggleTodo: (todoId: string) => void;

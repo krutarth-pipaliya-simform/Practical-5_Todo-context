@@ -1,12 +1,12 @@
-import { TodoContextProvider } from "@/components/TodoContextProvider";
 import { TaskForm } from "@/components/form/TaskForm";
+import { TodosProvider } from "@/components/TodosProvider";
 import { TodoWrapper } from "@/components/TodoWrapper";
 
 export const Home = () => {
     return (
-        <TodoContextProvider>
+        <TodosProvider>
             <TaskForm />
             <TodoWrapper />
-        </TodoContextProvider>
+        </TodosProvider>
     );
 };

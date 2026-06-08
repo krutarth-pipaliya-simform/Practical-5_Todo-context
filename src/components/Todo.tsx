@@ -1,11 +1,11 @@
 import type { TodoType } from "./types";
 import { Button } from "./ui/button";
-import { useTodoHandlerContext } from "@/hooks/useMyContext";
+import { useTodoContext } from "@/hooks/useTodoContext";
 
 export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: TodoType }) => {
-    const { deleteTodo, toggleTodo } = useTodoHandlerContext();
+    const { deleteTodo, toggleTodo } = useTodoContext();
     return (
-        <div className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted">
+        <li className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted">
             <div>
                 <input
                     className="cursor-pointer"
@@ -20,7 +20,6 @@ export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: T
 
             <div className="flex-1 overflow-x-auto">
                 <div className="font-medium ">{title}</div>
-
                 <div className="text-sm text-muted-foreground">{timeCreated}</div>
             </div>
 
@@ -32,6 +31,6 @@ export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: { todo: T
             >
                 Delete
             </Button>
-        </div>
+        </li>
     );
 };

@@ -1,8 +1,8 @@
-import { useTodoStateContext } from "@/hooks/useMyContext";
 import { Todo } from "./Todo";
+import { useTodoContext } from "@/hooks/useTodoContext";
 
 export const TodoList = ({ filter }: { filter: string }) => {
-    const todos = useTodoStateContext();
+    const { todos } = useTodoContext();
     return (
         <ul className="flex-1 pt-4 overflow-y-auto ">
             {todos
@@ -13,9 +13,7 @@ export const TodoList = ({ filter }: { filter: string }) => {
                         (filter === "Incomplete" && !isComplete),
                 )
                 .map((todo) => (
-                    <li key={todo.id}>
-                        <Todo todo={todo} />
-                    </li>
+                    <Todo key={todo.id} todo={todo} />
                 ))}
         </ul>
     );
