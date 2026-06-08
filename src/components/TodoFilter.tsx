@@ -2,6 +2,8 @@ import { type Dispatch, type SetStateAction } from "react";
 import { RadioGroupField } from "./RadioGroupField";
 import { RadioGroup } from "./ui/radio-group";
 
+const RadioGroupFieldArray = ["All", "Completed", "Incomplete"] as const;
+
 interface TodoFilterProps {
     filter: "All" | "Completed" | "Incomplete";
     setFilter: Dispatch<SetStateAction<"All" | "Completed" | "Incomplete">>;
@@ -25,5 +27,3 @@ export const TodoFilter = ({ filter, setFilter }: TodoFilterProps) => {
         </RadioGroup>
     );
 };
-
-const RadioGroupFieldArray = ["All", "Completed", "Incomplete"] as const;
