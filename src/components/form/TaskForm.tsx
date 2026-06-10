@@ -1,0 +1,39 @@
+import { memo } from "react";
+import { Button } from "../ui/button";
+import { FormField } from "./FormField";
+import { useTodoContext } from "@/hooks/useTodoContext";
+
+export const TaskForm = memo(() => {
+    const { createTodo } = useTodoContext();
+
+    return (
+        <header className="p-4">
+            <form
+                className="flex gap-4"
+                action={(formData: FormData) => {
+                    if (String(formData.get("todo")).trim() === "") {
+                        alert("please enter some text");
+                        return;
+                    }
+                    createTodo({
+                        id: crypto.randomUUID(),
+                        isComplete: false,
+                        timeCreated: new Date().toDateString(),
+                        title: String(formData.get("todo")),
+                    });
+                }}
+            >
+                <FormField
+                    key="todo"
+                    name="todo"
+                    placeholder="Enter a Todo"
+                    type="text"
+                    isRequired={true}
+                />
+                <Button className="transition-colors hover:bg-green-500 cursor-pointer hover:text-white">
+                    Create Todo
+                </Button>
+            </form>
+        </header>
+    );
+});
