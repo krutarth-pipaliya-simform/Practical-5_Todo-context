@@ -17,7 +17,7 @@ export const TaskForm = memo(() => {
                     setMode(!mode);
                 }}
             >
-                {mode ? "Dark" : "Light"} Mode
+                {mode ? "Light" : "Dark"} Mode
             </Button>
             <form
                 className="flex-1 flex gap-4"
