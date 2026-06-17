@@ -1,23 +1,19 @@
-import { memo, useState } from "react";
+import { memo } from "react";
+
+import { useTodoContext } from "@/hooks/useTodoContext";
+
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
-import { useTodoContext } from "@/hooks/useTodoContext";
+import { useTheme } from "@/hooks/useTheme";
 
 export const TaskForm = memo(() => {
     const { createTodo } = useTodoContext();
-    const [mode, setMode] = useState(() => document.body.classList.contains("dark"));
+    const { theme, toggleTheme } = useTheme();
 
     return (
         <header className="p-4 flex gap-4">
-            <Button
-                className=""
-                variant="outline"
-                onClick={() => {
-                    document.body.classList.toggle("dark");
-                    setMode(!mode);
-                }}
-            >
-                {mode ? "Light" : "Dark"} Mode
+            <Button className="" variant="outline" onClick={toggleTheme}>
+                {theme === "dark" ? "Light" : "Dark"} Mode
             </Button>
             <form
                 className="flex-1 flex gap-4"
