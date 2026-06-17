@@ -1,10 +1,10 @@
 import { memo } from "react";
 
 import { useTodoContext } from "@/hooks/useTodoContext";
+import { useTheme } from "@/hooks/useTheme";
 
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
-import { useTheme } from "@/hooks/useTheme";
 
 export const TaskForm = memo(() => {
     const { createTodo } = useTodoContext();
@@ -14,7 +14,7 @@ export const TaskForm = memo(() => {
         <header
             className={
                 "p-4 flex gap-4 " +
-                (theme === "light" ? "bg-white text-black" : "bg-black text-white")
+                (theme === "dark" ? "bg-black text-white" : "bg-white text-black")
             }
         >
             <Button

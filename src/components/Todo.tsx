@@ -1,7 +1,8 @@
 import { useTheme } from "@/hooks/useTheme";
+import { useTodoContext } from "@/hooks/useTodoContext";
+
 import type { TodoType } from "./types";
 import { Button } from "./ui/button";
-import { useTodoContext } from "@/hooks/useTodoContext";
 
 interface TodoProps {
     todo: TodoType;
