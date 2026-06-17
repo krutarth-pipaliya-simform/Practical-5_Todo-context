@@ -1,3 +1,4 @@
+import { useTheme } from "@/hooks/useTheme";
 import type { TodoType } from "./types";
 import { Button } from "./ui/button";
 import { useTodoContext } from "@/hooks/useTodoContext";
@@ -8,8 +9,16 @@ interface TodoProps {
 
 export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps) => {
     const { deleteTodo, toggleTodo } = useTodoContext();
+
+    const { theme } = useTheme();
+
     return (
-        <li className="flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted">
+        <li
+            className={
+                "flex items-center gap-4 rounded-lg p-3 transition-colors hover:bg-muted " +
+                (theme === "dark" ? "hover:text-black" : null)
+            }
+        >
             <div>
                 <input
                     className="cursor-pointer"
@@ -31,7 +40,12 @@ export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps
                 onClick={() => {
                     deleteTodo(id);
                 }}
-                className="transition-colors hover:bg-red-500 cursor-pointer hover:text-white"
+                className={
+                    "transition-colors hover:bg-red-500 cursor-pointer hover:text-white " +
+                    (theme === "dark"
+                        ? "bg-white text-black hover:bg-black hover:text-white"
+                        : "bg-black text-white hover:bg-white hover:text-black")
+                }
             >
                 Delete
             </Button>

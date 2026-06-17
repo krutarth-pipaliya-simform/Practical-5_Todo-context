@@ -1,4 +1,5 @@
 import { useId, type HTMLInputTypeAttribute } from "react";
+
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
@@ -12,8 +13,9 @@ export interface FormFieldType {
 
 export const FormField = ({ label, type, name, placeholder, isRequired }: FormFieldType) => {
     const id = useId();
+
     return (
-        <div className="flex-1">
+        <div className="flex-1 ">
             {label && <Label htmlFor={id}>{label}</Label>}
             <Input
                 required={isRequired}

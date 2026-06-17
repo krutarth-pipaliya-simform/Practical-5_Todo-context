@@ -11,8 +11,17 @@ export const TaskForm = memo(() => {
     const { theme, toggleTheme } = useTheme();
 
     return (
-        <header className="p-4 flex gap-4">
-            <Button className="" variant="outline" onClick={toggleTheme}>
+        <header
+            className={
+                "p-4 flex gap-4 " +
+                (theme === "light" ? "bg-white text-black" : "bg-black text-white")
+            }
+        >
+            <Button
+                className={theme === "dark" ? "bg-white text-black" : "bg-black text-white"}
+                variant="outline"
+                onClick={toggleTheme}
+            >
                 {theme === "dark" ? "Light" : "Dark"} Mode
             </Button>
             <form
@@ -37,7 +46,14 @@ export const TaskForm = memo(() => {
                     type="text"
                     isRequired={true}
                 />
-                <Button className="transition-colors hover:bg-green-500 cursor-pointer hover:text-white">
+                <Button
+                    className={
+                        theme === "dark"
+                            ? "bg-white text-black"
+                            : "bg-black text-white" +
+                              " transition-colors hover:bg-green-500 cursor-pointer hover:text-white"
+                    }
+                >
                     Create Todo
                 </Button>
             </form>
