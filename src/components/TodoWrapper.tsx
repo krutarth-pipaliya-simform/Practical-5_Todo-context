@@ -1,7 +1,9 @@
 import { useState } from "react";
+
+import { useTheme } from "@/hooks/useTheme";
+
 import { TodoFilter } from "./TodoFilter";
 import { TodoList } from "./TodoList";
-import { useTheme } from "@/hooks/useTheme";
 
 export const TodoWrapper = () => {
     const [filter, setFilter] = useState<"All" | "Completed" | "Incomplete">("All");
