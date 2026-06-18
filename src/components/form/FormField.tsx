@@ -15,7 +15,7 @@ export const FormField = ({ label, type, name, placeholder, isRequired }: FormFi
     const id = useId();
 
     return (
-        <div className="flex-1 ">
+        <div className="flex-1">
             {label && <Label htmlFor={id}>{label}</Label>}
             <Input
                 required={isRequired}
