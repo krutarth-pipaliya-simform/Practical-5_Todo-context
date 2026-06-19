@@ -2,7 +2,7 @@ import { useTheme } from "@/hooks/useTheme";
 
 import type { TodoType } from "./types";
 import { Button } from "./ui/button";
-import { useTodoDispatch } from "@/hooks/useTodoContext";
+import { useTodoDispatch } from "@/hooks/useTodoDispatch";
 import { deleteTodo, toggleTodo } from "@/store/slices/todoSlice";
 
 interface TodoProps {

@@ -1,12 +1,12 @@
 import { Todo } from "./Todo";
-import { useTodos } from "@/hooks/useTodoContext";
+import { useTodos } from "@/hooks/useTodos";
 
 interface TodoListProps {
     filter: string;
 }
 
 export const TodoList = ({ filter }: TodoListProps) => {
-    const todos = useTodos(({ todos }) => todos);
+    const todos = useTodos();
     return (
         <ul className="flex-1 pt-4 overflow-y-auto ">
             {todos
