@@ -6,10 +6,12 @@ import { Button } from "../ui/button";
 import { FormField } from "./FormField";
 import { useTodoDispatch } from "@/hooks/useTodoDispatch";
 import { createTodo } from "@/store/slices/todoSlice";
+import { toggleTheme } from "@/store/slices/themeSlice";
 
 export const TaskForm = memo(() => {
-    const { theme, toggleTheme } = useTheme();
+    const theme = useTheme();
     const dispatch = useTodoDispatch();
+
     return (
         <header
             className={
@@ -20,7 +22,7 @@ export const TaskForm = memo(() => {
             <Button
                 className={theme === "dark" ? "bg-white text-black" : "bg-black text-white"}
                 variant="outline"
-                onClick={toggleTheme}
+                onClick={() => dispatch(toggleTheme())}
             >
                 {theme === "dark" ? "Light" : "Dark"} Mode
             </Button>

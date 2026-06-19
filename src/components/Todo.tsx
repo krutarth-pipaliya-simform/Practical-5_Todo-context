@@ -12,7 +12,7 @@ interface TodoProps {
 export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps) => {
     const dispatch = useTodoDispatch();
 
-    const { theme } = useTheme();
+    const theme = useTheme();
 
     return (
         <li
