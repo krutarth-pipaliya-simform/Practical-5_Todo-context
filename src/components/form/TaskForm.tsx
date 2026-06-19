@@ -1,15 +1,15 @@
 import { memo } from "react";
 
-import { useTodoContext } from "@/hooks/useTodoContext";
 import { useTheme } from "@/hooks/useTheme";
 
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
+import { useTodoDispatch } from "@/hooks/useTodoContext";
+import { createTodo } from "@/store/slices/todoSlice";
 
 export const TaskForm = memo(() => {
-    const { createTodo } = useTodoContext();
     const { theme, toggleTheme } = useTheme();
-
+    const dispatch = useTodoDispatch();
     return (
         <header
             className={
@@ -31,12 +31,14 @@ export const TaskForm = memo(() => {
                         alert("please enter some text");
                         return;
                     }
-                    createTodo({
-                        id: crypto.randomUUID(),
-                        isComplete: false,
-                        timeCreated: new Date().toDateString(),
-                        title: String(formData.get("todo")),
-                    });
+                    dispatch(
+                        createTodo({
+                            id: crypto.randomUUID(),
+                            isComplete: false,
+                            timeCreated: new Date().toDateString(),
+                            title: String(formData.get("todo")),
+                        }),
+                    );
                 }}
             >
                 <FormField
