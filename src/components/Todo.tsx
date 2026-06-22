@@ -1,9 +1,9 @@
 import { useTheme } from "@/hooks/useTheme";
+import { useTodoDispatch } from "@/hooks/useTodoDispatch";
+import { deleteTodo, toggleTodo } from "@/store/slices/todoSlice";
 
 import type { TodoType } from "./types";
 import { Button } from "./ui/button";
-import { useTodoDispatch } from "@/hooks/useTodoDispatch";
-import { deleteTodo, toggleTodo } from "@/store/slices/todoSlice";
 
 interface TodoProps {
     todo: TodoType;
@@ -11,7 +11,6 @@ interface TodoProps {
 
 export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps) => {
     const dispatch = useTodoDispatch();
-
     const theme = useTheme();
 
     return (
