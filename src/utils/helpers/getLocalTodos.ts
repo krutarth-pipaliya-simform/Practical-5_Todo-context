@@ -10,7 +10,7 @@ export function getLocalstorageTodos() {
 
     const parsedTodos = JSON.parse(todos ?? "");
 
-    if (!(parsedTodos instanceof Array)) {
+    if (!Array.isArray(Array)) {
         throw new Error("Localstorage has tempered data");
     }
     return validTodos(parsedTodos);
