@@ -1,6 +1,6 @@
 import { useTheme } from "@/hooks/useTheme";
 import { useTodoDispatch } from "@/hooks/useTodoDispatch";
-import { deleteTodo, toggleTodo } from "@/store/slices/todoSlice";
+import { deleteTodoThunk, toggleTodoThunk } from "@/store/slices/todoThunk";
 
 import type { TodoType } from "./types";
 import { Button } from "./ui/button";
@@ -27,7 +27,7 @@ export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps
                     name="isComplete"
                     checked={isComplete}
                     onChange={() => {
-                        dispatch(toggleTodo(String(id)));
+                        dispatch(toggleTodoThunk(String(id)));
                     }}
                 />
             </div>
@@ -39,7 +39,7 @@ export const Todo = ({ todo: { title, timeCreated, isComplete, id } }: TodoProps
 
             <Button
                 onClick={() => {
-                    dispatch(deleteTodo(id));
+                    dispatch(deleteTodoThunk(id));
                 }}
                 className={
                     "transition-colors hover:bg-red-500 cursor-pointer hover:text-white " +

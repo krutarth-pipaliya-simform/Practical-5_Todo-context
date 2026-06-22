@@ -3,10 +3,10 @@ import { memo } from "react";
 import { useTheme } from "@/hooks/useTheme";
 import { useTodoDispatch } from "@/hooks/useTodoDispatch";
 import { createTodo } from "@/store/slices/todoSlice";
-import { toggleTheme } from "@/store/slices/themeSlice";
 
 import { Button } from "../ui/button";
 import { FormField } from "./FormField";
+import { toggleThemeThunk } from "@/store/slices/toggleThemeThunk";
 
 export const TaskForm = memo(() => {
     const theme = useTheme();
@@ -22,7 +22,7 @@ export const TaskForm = memo(() => {
             <Button
                 className={theme === "dark" ? "bg-white text-black" : "bg-black text-white"}
                 variant="outline"
-                onClick={() => dispatch(toggleTheme())}
+                onClick={() => dispatch(toggleThemeThunk())}
             >
                 {theme === "dark" ? "Light" : "Dark"} Mode
             </Button>
