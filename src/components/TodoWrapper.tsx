@@ -7,7 +7,8 @@ import { TodoList } from "./TodoList";
 
 export const TodoWrapper = () => {
     const [filter, setFilter] = useState<"All" | "Completed" | "Incomplete">("All");
-    const { theme } = useTheme();
+    const theme = useTheme();
+
     return (
         <main
             className={
